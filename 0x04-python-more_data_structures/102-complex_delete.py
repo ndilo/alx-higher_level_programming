@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-def complex_delete(primDictionary, primValue):
-    for key, value in sorted(primDictionary.items()):
-        if value == primValue:
-            del primDictionary[key]
-    return prmDictionary
+def complex_delete(a_dictionary: dict, value):
+    while value in a_dictionary.values():
+        for key, val in a_dictionary.items():
+            if val == value:
+                del a_dictionary[key]
+                break
+    return a_dictionary
