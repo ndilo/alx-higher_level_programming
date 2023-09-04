@@ -1,58 +1,50 @@
 #!/usr/bin/python3
-from sys import argv
+"""A program that solves the N queens problem."""
+import sys
 
-"""
-Program to find a solution for The N Queens Puzzle
-"""
+if len(sys.argv) != 2:
+    print("Usage: nqueens N")
+    sys.exit(1)
 
-class Queen:
+try:
+    SIZE = int(sys.argv[1])
+except ValueError:
+    print("N must be a number")
+    sys.exit(1)
+
+if SIZE < 4:
+    print("N must be at least 4")
+    sys.exit(1)
+
+
+def solve_n_queens(N: int):
+    """Computes all possible solutions to the problem for a given N.
+
+    Args:
+        N (int): Dimenstion of the chessboard / number of queens.
     """
-    class Queen to solve nQueens problem
-    """
-    def can_move(self, x, y, right):
-        """
-        Checking if queen can move in the valid constraint column given
-        """
-        for a in range(x):
-            if right[a] == y:
-                return (False)
-            if abs(right[a] - y) == (x - a):
-                return (False)
-            return (True)
+    def is_safe(board, row, col):
+        # Check if it is safe to place a queen at the given position
+        for i in range(row):
+            if board[i] == col or \
+                    board[i] - i == col - row or \
+                    board[i] + i == col + row:
+                return False
+        return True
 
-    def soln(self, n, N, right):
-        """
-        Finding all the right combinations that can happen using recursion
-        """
-        if n == N:
-            print("[", end="")
-            for j in range(N):
-                print("{}, {}]".format(j, right[j]), end="")
-                if j < N - 1:
-                    print(", ", end="")
-            print("]")
-            return
+    def solve(board, row):
+        if row == N:
+            # All queens have been placed, print the solution
+            print([[i, board[i]] for i in range(N)])
+        else:
+            for col in range(N):
+                if is_safe(board, row, col):
+                    board[row] = col
+                    solve(board, row + 1)
 
-        for j in range(N):
-            if self.can_move(n, j, right):
-                right[n] = j
-                self.solution(n + 1, N, right)
+    board = [-1] * N
+    solve(board, 0)
+
 
 if __name__ == "__main__":
-    count = len(argv)
-
-    if count != 2:
-        print("Usage: nqueens N")
-        exit(1)
-    else:
-        try:
-            N = int(arg[1])
-        except:
-            print("N must be a number")
-            exit(1)
-    if N < 4:
-        print("N must be at least 4")
-        exit(1)
-
-    final = Queen()
-    final.soln(0, N, [None for i in range(N)])
+    solve_n_queens(SIZE)
