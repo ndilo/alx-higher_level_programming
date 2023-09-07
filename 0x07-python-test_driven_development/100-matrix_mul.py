@@ -1,3 +1,10 @@
+#!/usr/bin/python3
+"""
+Module multiplies 2 matrices
+Raise:
+    ValueError
+    TypeError
+"""
 def matrix_mul(m_a, m_b):
     """
     Multiplies two matrices m_a and m_b.
