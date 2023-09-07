@@ -115,3 +115,40 @@ TypeError: m_b should contain only integers or floats
 Traceback (most recent call last):
 ...
 TypeError: m_a should contain only integers or floats
+
+# Test case 1: Matrices with different dimensions
+try:
+    matrix_mul([[1, 2, 3], [4, 5, 6]], [[1, 2], [3, 4]])
+except ValueError as e:
+    print("Test case 1 passed:", e)
+else:
+    print("Test case 1 failed")
+
+# Test case 2: Matrices with non-numeric elements
+try:
+    matrix_mul([[1, 'a'], [2, 3]], [['x', 4], [5, 6]])
+except TypeError as e:
+    print("Test case 2 passed:", e)
+else:
+    print("Test case 2 failed")
+
+# Test case 3: Large matrices
+matrix_a = [[1] * 100] * 100
+matrix_b = [[1] * 100] * 100
+result = matrix_mul(matrix_a, matrix_b)
+expected_result = [[100] * 100] * 100
+if result == expected_result:
+    print("Test case 3 passed")
+else:
+    print("Test case 3 failed")
+
+# Test case 4: Matrices with negative numbers
+matrix_a = [[-1, -2], [-3, -4]]
+matrix_b = [[-1, -2], [-3, -4]]
+result = matrix_mul(matrix_a, matrix_b)
+expected_result = [[5, 10], [15, 26]]
+if result == expected_result:
+    print("Test case 4 passed")
+else:
+    print("Test case 4 failed")
+
