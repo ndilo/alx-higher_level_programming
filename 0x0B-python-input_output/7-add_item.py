@@ -1,23 +1,19 @@
 #!/usr/bin/python3
-"""
-file with function that adds all arguments to
-a python list and saves to a file
-"""
+"""Load, add, save"""
+import os
+import sys
 
+save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
-import json
-from sys import argv
+if __name__ == "__main__":
+    filename = "add_item.json"
+    args = list(sys.argv[1:])
 
+    if os.path.isfile(filename):
+        from_file = list(load_from_json_file(filename))
+    else:
+        from_file = []
 
-save_json = __import__('5-save_to_json_file').save_to_json_file
-load_json = __import__('6-load_from_json_file').load_from_json_file
-
-filename = 'add_item.json'
-
-try:
-    new_item = load_json(filename)
-except (ValueError, FileNotFoundError):
-    new_item = []
-
-new_item = new_item + argv[1:]
-save_json(new_item, filename)
+    from_file.extend(args)
+    save_to_json_file(from_file, filename)

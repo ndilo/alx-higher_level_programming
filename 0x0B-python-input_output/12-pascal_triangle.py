@@ -17,7 +17,7 @@ def pascal_triangle(n: int):
 
     pascal = [[1]]
     for _ in range(1, n):
-        row = paschal[-1]
+        row = pascal[-1]
         curr = [1]
         curr.extend(row[i] + row[i + 1] for i in range(len(row) - 1))
         curr.append(1)
