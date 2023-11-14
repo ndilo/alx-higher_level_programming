@@ -1,17 +1,15 @@
 #!/usr/bin/node
+const dict = require('./101-data.js');
 
-const dict = require('./101-data').dict;
+const newDict = {};
+const entries = dict.dict;
 
-const reversedDict = {};
-
-for (const userId in dict) {
-  const occurrences = dict[userId];
-
-  if (reversedDict[occurrences] === undefined) {
-    reversedDict[occurrences] = [userId];
+for (const key in entries) {
+  if (newDict[entries[key]] === undefined) {
+    newDict[entries[key]] = [key];
   } else {
-    reversedDict[occurrences].push(userId);
+    newDict[entries[key]].push(key);
   }
 }
 
-console.log(reversedDict);
+console.log(newDict);
