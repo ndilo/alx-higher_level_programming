@@ -1,15 +1,19 @@
 #!/usr/bin/node
-const dict = require('./101-data.js');
+
+const { dict } = require('./101-data');
+
+const ids = Object.values(dict);
+const occurs = Object.keys(dict);
 
 const newDict = {};
-const entries = dict.dict;
+ids.forEach(id => {
+  newDict[id] = [];
+});
 
-for (const key in entries) {
-  if (newDict[entries[key]] === undefined) {
-    newDict[entries[key]] = [key];
-  } else {
-    newDict[entries[key]].push(key);
-  }
-}
+let index = 0;
+ids.forEach(id => {
+  newDict[id].push(occurs[index]);
+  index++;
+});
 
 console.log(newDict);
