@@ -1,14 +1,11 @@
 #!/usr/bin/node
 
-const list = require('./100-data').list;
+const list = require('./100-data');
 
-console.log(list);
+// Original list
+console.log('Original list:', list);
 
-let index = 0;
-const listMap = list.map((n) => {
-  index++;
-  return n * (index - 1);
-}
-);
+// New list computed using map
+const newList = list.map((value, index) => value * index);
 
-console.log(listMap);
+console.log('New list:', newList);
